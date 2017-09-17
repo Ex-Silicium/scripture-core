@@ -33,8 +33,13 @@ class ScriptureReferenceUtil private constructor() {
             }
         }
 
-        private fun parseVerseRanges(verseRangesString: String): List<VerseRange> {
-            return listOf(VerseRange(Verse(verseRangesString.toInt())))
+        private fun parseVerseRanges(verseRangesString: String) = when {
+            verseRangesString.contains(',') -> verseRangesString.split(',').map { parseVerseRange(it) }
+            else -> listOf(parseVerseRange(verseRangesString))
+        }
+
+        private fun parseVerseRange(verseRangeString: String): VerseRange {
+            return VerseRange(Verse(verseRangeString.trim().toInt()))
         }
     }
 }
