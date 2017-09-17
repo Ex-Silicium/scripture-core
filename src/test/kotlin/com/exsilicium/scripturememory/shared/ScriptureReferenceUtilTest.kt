@@ -20,12 +20,12 @@ internal class ScriptureReferenceUtilTest {
     }
 
     @Test fun `Parse reference from single verse`() {
-        assertEquals(ScriptureReference(JOHN, 1, listOf(VerseRange(Verse(1)))),
+        assertEquals(ScriptureReference(JOHN, 1, Verse(1)),
                 ScriptureReferenceUtil.parse("John 1:1"))
     }
 
     @Test fun `Parse bible book name with spaces`() {
-        assertEquals(ScriptureReference(FIRST_PETER, 2, listOf(VerseRange(Verse(9)))),
+        assertEquals(ScriptureReference(FIRST_PETER, 2, Verse(9)),
                 ScriptureReferenceUtil.parse("First Peter 2:9"))
     }
 
@@ -40,7 +40,7 @@ internal class ScriptureReferenceUtilTest {
     }
 
     @Test fun `Parse single verse range`() {
-        assertEquals(ScriptureReference(FIRST_CORINTHIANS, 13, listOf(VerseRange(Verse(4), Verse(8)))),
+        assertEquals(ScriptureReference(FIRST_CORINTHIANS, 13, Verse(4)..Verse(8)),
                 ScriptureReferenceUtil.parse("1 Corinthians 13:4-8"))
     }
 }

@@ -41,7 +41,7 @@ class ScriptureReferenceUtil private constructor() {
         private fun parseVerseRange(verseRangeString: String) = when {
             verseRangeString.contains('-') -> {
                 verseRangeString.split('-').let {
-                    VerseRange(parseVerse(it[0]), parseVerse(it[1]))
+                    parseVerse(it[0])..parseVerse(it[1])
                 }
             }
             else -> VerseRange(parseVerse(verseRangeString))

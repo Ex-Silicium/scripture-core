@@ -1,10 +1,10 @@
 package com.exsilicium.scripturememory.shared.model
 
 data class VerseRange(
-        val start: Verse,
-        val end: Verse = start
-) {
+        override val start: Verse,
+        override val endInclusive: Verse = start
+) : ClosedRange<Verse> {
     init {
-        require(start <= end)
+        require(start <= endInclusive)
     }
 }
