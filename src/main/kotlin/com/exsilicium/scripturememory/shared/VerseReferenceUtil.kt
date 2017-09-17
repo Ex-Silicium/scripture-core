@@ -10,9 +10,8 @@ class VerseReferenceUtil private constructor() {
         fun parse(reference: String): VerseReference {
             val referenceParts = reference.split(" ")
             val numberParts = referenceParts[1].split(":")
-            val book = BibleBook.parse(referenceParts[0])
             return VerseReference(
-                    book,
+                    BibleBook.parse(referenceParts[0]),
                     numberParts[0].toInt(),
                     parseVerseRanges(numberParts[1])
             )
