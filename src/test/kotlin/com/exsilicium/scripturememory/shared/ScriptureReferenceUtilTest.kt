@@ -43,4 +43,9 @@ internal class ScriptureReferenceUtilTest {
         assertEquals(ScriptureReference(FIRST_CORINTHIANS, 13, Verse(4)..Verse(8)),
                 ScriptureReferenceUtil.parse("1 Corinthians 13:4-8"))
     }
+
+    @Test fun `Parse reference from verse part`() {
+        assertEquals(ScriptureReference(EZEKIEL, 38, Verse(22, 'b')),
+                ScriptureReferenceUtil.parse("Ezekiel 38:22B"))
+    }
 }

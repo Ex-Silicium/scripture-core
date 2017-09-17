@@ -4,6 +4,8 @@ import com.exsilicium.scripturememory.shared.model.BibleBook
 import com.exsilicium.scripturememory.shared.model.ScriptureReference
 import com.exsilicium.scripturememory.shared.model.Verse
 import com.exsilicium.scripturememory.shared.model.VerseRange
+import java.security.InvalidParameterException
+import kotlin.text.RegexOption.IGNORE_CASE
 
 class ScriptureReferenceUtil private constructor() {
     companion object {
@@ -47,8 +49,16 @@ class ScriptureReferenceUtil private constructor() {
             else -> VerseRange(parseVerse(verseRangeString))
         }
 
-        private fun parseVerse(verseString: String): Verse {
-            return Verse(verseString.trim().toInt())
+        private fun parseVerse(verseString: String) = when {
+            verseString.contains(Regex("[a-c]", IGNORE_CASE)) -> {
+                verseString.forEachIndexed { i, char ->
+                    if (char.isLetter()) {
+                        return Verse(verseString.substring(0, i).trim().toInt(), char.toLowerCase())
+                    }
+                }
+                throw InvalidParameterException("Failed to parse verse")
+            }
+            else -> Verse(verseString.trim().toInt())
         }
     }
 }
