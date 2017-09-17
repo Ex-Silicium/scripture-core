@@ -38,8 +38,17 @@ class ScriptureReferenceUtil private constructor() {
             else -> listOf(parseVerseRange(verseRangesString))
         }
 
-        private fun parseVerseRange(verseRangeString: String): VerseRange {
-            return VerseRange(Verse(verseRangeString.trim().toInt()))
+        private fun parseVerseRange(verseRangeString: String) = when {
+            verseRangeString.contains('-') -> {
+                verseRangeString.split('-').let {
+                    VerseRange(parseVerse(it[0]), parseVerse(it[1]))
+                }
+            }
+            else -> VerseRange(parseVerse(verseRangeString))
+        }
+
+        private fun parseVerse(verseString: String): Verse {
+            return Verse(verseString.trim().toInt())
         }
     }
 }

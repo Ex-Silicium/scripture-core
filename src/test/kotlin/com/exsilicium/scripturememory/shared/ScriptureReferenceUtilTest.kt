@@ -38,4 +38,9 @@ internal class ScriptureReferenceUtilTest {
         assertEquals(ScriptureReference(JOHN, 6, listOf(VerseRange(Verse(14)), VerseRange(Verse(44)))),
                 ScriptureReferenceUtil.parse("John 6:14, 44"))
     }
+
+    @Test fun `Parse single verse range`() {
+        assertEquals(ScriptureReference(FIRST_CORINTHIANS, 13, listOf(VerseRange(Verse(4), Verse(8)))),
+                ScriptureReferenceUtil.parse("1 Corinthians 13:4-8"))
+    }
 }
