@@ -11,12 +11,14 @@ class ScriptureReferenceUtil private constructor() {
             require(input.isNotEmpty())
             val reference = input.trim()
             if (reference.contains(':')) {
-                val referenceParts = reference.split(' ')
-                val numberParts = referenceParts[1].split(':')
+                val referenceParts = reference.split(':')
+                val endIndex = referenceParts[0].lastIndexOf(' ')
+                val book = referenceParts[0].substring(0, endIndex)
+                val chapter = referenceParts[0].substring(endIndex).trim()
                 return ScriptureReference(
-                        BibleBook.parse(referenceParts[0]),
-                        numberParts[0].toInt(),
-                        parseVerseRanges(numberParts[1])
+                        BibleBook.parse(book),
+                        chapter.toInt(),
+                        parseVerseRanges(referenceParts[1])
                 )
             } else {
                 if (reference.contains(Regex("[1-9]"))) {

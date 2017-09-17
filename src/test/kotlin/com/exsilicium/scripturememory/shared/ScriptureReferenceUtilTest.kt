@@ -25,7 +25,12 @@ internal class ScriptureReferenceUtilTest {
     }
 
     @Test fun `Parse bible book name with spaces`() {
-        assertEquals(ScriptureReference(FIRST_CORINTHIANS, 6, listOf()),
-                ScriptureReferenceUtil.parse("1 Corinthians 6"))
+        assertEquals(ScriptureReference(FIRST_PETER, 2, listOf(VerseRange(Verse(9)))),
+                ScriptureReferenceUtil.parse("First Peter 2:9"))
+    }
+
+    @Test fun `Parse bible book name with number`() {
+        assertEquals(ScriptureReference(FIRST_CORINTHIANS),
+                ScriptureReferenceUtil.parse("1 Corinthians"))
     }
 }
