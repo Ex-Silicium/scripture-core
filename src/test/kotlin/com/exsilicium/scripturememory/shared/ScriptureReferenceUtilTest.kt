@@ -48,4 +48,15 @@ internal class ScriptureReferenceUtilTest {
         assertEquals(ScriptureReference(EZEKIEL, 38, Verse(22, 'b')),
                 ScriptureReferenceUtil.parse("Ezekiel 38:22B"))
     }
+
+    @Test fun `Parse multiple verse ranges with multiple verses`() {
+        assertEquals(
+                ScriptureReference(
+                        JOHN,
+                        20,
+                        listOf(VerseRange(Verse(24)), Verse(26)..Verse(28))
+                ),
+                ScriptureReferenceUtil.parse("John 20:24,26-28")
+        )
+    }
 }
