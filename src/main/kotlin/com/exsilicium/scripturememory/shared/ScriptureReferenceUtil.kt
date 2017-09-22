@@ -9,6 +9,9 @@ import kotlin.text.RegexOption.IGNORE_CASE
 
 class ScriptureReferenceUtil private constructor() {
     companion object {
+
+        // TODO parse multiple references
+
         fun parse(input: String): ScriptureReference {
             require(input.isNotEmpty())
             val reference = input.trim()
