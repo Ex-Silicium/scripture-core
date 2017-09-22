@@ -1,6 +1,6 @@
 package com.exsilicium.scripturememory.shared
 
-import com.exsilicium.scripturememory.shared.model.BibleBook.*
+import com.exsilicium.scripturememory.shared.model.Book.*
 import com.exsilicium.scripturememory.shared.model.ScriptureReference
 import com.exsilicium.scripturememory.shared.model.Verse
 import com.exsilicium.scripturememory.shared.model.VerseRange
