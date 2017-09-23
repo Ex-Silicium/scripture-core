@@ -1,20 +1,30 @@
 package com.exsilicium.scripturememory.shared.model
 
 data class ScriptureReference(
-        // todo consider hierarchy: Book, or Book and Chapter(s), or Book and ch.(s) and verse(s)
         val book: Book,
-        val chapter: Int, // todo permit chapter ranges like 2:9-3:2
-        val verseRanges: List<ClosedRange<Verse>> = listOf()
-) {
+        val location: Location? = null
+) : Comparable<ScriptureReference> {
     constructor(
             book: Book,
-            chapter: Int,
-            verseRange: ClosedRange<Verse>
-    ) : this(book, chapter, listOf(verseRange))
+            chapter: Int
+    ) : this(book, ChapterRanges(setOf(ChapterRange(chapter))))
 
     constructor(
             book: Book,
-            chapter: Int,
             verse: Verse
-    ) : this(book, chapter, listOf(VerseRange(verse)))
+    ) : this(book, VerseRanges(setOf(VerseRange(verse))))
+
+    override fun compareTo(other: ScriptureReference) = book.compareTo(other.book).let {
+        when {
+            it != 0 -> it
+            location == null -> when {
+                other.location == null -> 0
+                else -> -1
+            }
+            else -> when {
+                other.location == null -> 1
+                else -> 0
+            }
+        }
+    }
 }

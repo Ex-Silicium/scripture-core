@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
-internal class VerseRangeTest {
-    @Test fun `Verse range default constructor`() {
-        assertEquals(VerseRange(Verse(1, 1), Verse(1, 1)), VerseRange(Verse(1, 1)))
+internal class ChapterRangeTest {
+    @Test fun `Chapter range default constructor`() {
+        assertEquals(ChapterRange(1, 1), ChapterRange(1))
     }
 
     @Test fun `Require range start less than or equal to end`() {
-        assertThrows(IllegalArgumentException::class.java) { VerseRange(Verse(1, 2), Verse(1, 1)) }
+        assertThrows(IllegalArgumentException::class.java) { ChapterRange(2, 1) }
     }
 }
