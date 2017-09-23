@@ -23,7 +23,7 @@ data class ScriptureReference(
             }
             else -> when {
                 other.location == null -> 1
-                else -> 0
+                else -> location.compareTo(other.location)
             }
         }
     }
