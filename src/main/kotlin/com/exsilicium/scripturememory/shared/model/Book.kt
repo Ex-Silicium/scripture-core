@@ -1,6 +1,6 @@
 package com.exsilicium.scripturememory.shared.model
 
-enum class BibleBook(
+enum class Book(
         val title: String,
         val abbreviations: List<String>
 ) {

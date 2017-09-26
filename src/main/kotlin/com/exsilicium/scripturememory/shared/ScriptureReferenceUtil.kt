@@ -1,9 +1,6 @@
 package com.exsilicium.scripturememory.shared
 
-import com.exsilicium.scripturememory.shared.model.BibleBook
-import com.exsilicium.scripturememory.shared.model.ScriptureReference
-import com.exsilicium.scripturememory.shared.model.Verse
-import com.exsilicium.scripturememory.shared.model.VerseRange
+import com.exsilicium.scripturememory.shared.model.*
 import java.security.InvalidParameterException
 import kotlin.text.RegexOption.IGNORE_CASE
 
@@ -18,47 +15,60 @@ class ScriptureReferenceUtil private constructor() {
                 val book = referenceParts[0].substring(0, endIndex)
                 val chapter = referenceParts[0].substring(endIndex).trim()
                 return ScriptureReference(
-                        BibleBook.parse(book),
-                        chapter.toInt(),
-                        parseVerseRanges(referenceParts[1])
+                        Book.parse(book),
+                        VerseRanges(parseVerseRanges(chapter.toInt(), referenceParts[1]))
                 )
             } else {
                 if (reference.contains(Regex("[1-9]"))) {
                     reference.forEachIndexed({ i, char ->
                         if (char.isDigit() and (i > 0)) {
-                            val book = BibleBook.parse(reference.substring(0, i))
-                            return ScriptureReference(book, reference.substring(i).toInt())
+                            val book = Book.parse(reference.substring(0, i))
+                            return ScriptureReference(book, parseChapterRanges(reference.substring(i)))
                         }
                     })
                 }
-                return ScriptureReference(BibleBook.parse(reference))
+                return ScriptureReference(Book.parse(reference))
             }
         }
 
-        private fun parseVerseRanges(verseRangesString: String) = when {
-            verseRangesString.contains(',') -> verseRangesString.split(',').map { parseVerseRange(it) }
-            else -> listOf(parseVerseRange(verseRangesString))
+        private fun parseChapterRanges(chapters: String) = when {
+            chapters.contains(',') -> ChapterRanges(chapters.split(",").map { parseChapterRange(it) }
+                    .toSortedSet(ChapterRangeComparator()))
+            else -> ChapterRanges(parseChapterRange(chapters))
         }
 
-        private fun parseVerseRange(verseRangeString: String) = when {
+        private fun parseChapterRange(chapterRangeString: String) = when {
+            chapterRangeString.contains('-') -> chapterRangeString.split('-').let {
+                it[0].trim().toInt()..it[1].trim().toInt()
+            }
+            else -> ChapterRange(chapterRangeString.trim().toInt())
+        }
+
+        private fun parseVerseRanges(chapter: Int, verseRangesString: String) = when {
+            verseRangesString.contains(',') -> verseRangesString.split(',').map { parseVerseRange(chapter, it) }
+                    .toSortedSet(VerseRangeComparator())
+            else -> sortedSetOf(VerseRangeComparator(), parseVerseRange(chapter, verseRangesString))
+        }
+
+        private fun parseVerseRange(chapter: Int, verseRangeString: String) = when {
             verseRangeString.contains('-') -> {
                 verseRangeString.split('-').let {
-                    parseVerse(it[0])..parseVerse(it[1])
+                    parseVerse(chapter, it[0])..parseVerse(chapter, it[1])
                 }
             }
-            else -> VerseRange(parseVerse(verseRangeString))
+            else -> VerseRange(parseVerse(chapter, verseRangeString))
         }
 
-        private fun parseVerse(verseString: String) = when {
+        private fun parseVerse(chapter: Int, verseString: String) = when {
             verseString.contains(Regex("[a-c]", IGNORE_CASE)) -> {
                 verseString.forEachIndexed { i, char ->
                     if (char.isLetter()) {
-                        return Verse(verseString.substring(0, i).trim().toInt(), char.toLowerCase())
+                        return Verse(chapter, verseString.substring(0, i).trim().toInt(), char.toLowerCase())
                     }
                 }
                 throw InvalidParameterException("Failed to parse verse")
             }
-            else -> Verse(verseString.trim().toInt())
+            else -> Verse(chapter, verseString.trim().toInt())
         }
     }
 }
