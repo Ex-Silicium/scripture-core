@@ -8,3 +8,7 @@ data class ChapterRange(
         require(start <= endInclusive)
     }
 }
+
+internal class ChapterRangeComparator : Comparator<ClosedRange<Int>> {
+    override fun compare(first: ClosedRange<Int>, second: ClosedRange<Int>) = first.start.compareTo(second.start)
+}

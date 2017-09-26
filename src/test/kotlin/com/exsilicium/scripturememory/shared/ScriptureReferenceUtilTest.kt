@@ -18,17 +18,17 @@ internal class ScriptureReferenceUtilTest {
     }
 
     @Test fun `Parse chapter range`() {
-        assertEquals(ScriptureReference(ROMANS, ChapterRanges(setOf(8..9))),
+        assertEquals(ScriptureReference(ROMANS, ChapterRanges(8..9)),
                 ScriptureReferenceUtil.parse("Romans 8-9"))
     }
 
     @Test fun `Parse chapter and a chapter range`() {
-        assertEquals(ScriptureReference(ROMANS, ChapterRanges(setOf(ChapterRange(8), 11..13))),
+        assertEquals(ScriptureReference(ROMANS, ChapterRanges(ChapterRange(8), 11..13)),
                 ScriptureReferenceUtil.parse("Romans 8, 11-13"))
     }
 
     @Test fun `Parse multiple chapter ranges`() {
-        assertEquals(ScriptureReference(ROMANS, ChapterRanges(setOf(8..9, 11..13))),
+        assertEquals(ScriptureReference(ROMANS, ChapterRanges(8..9, 11..13)),
                 ScriptureReferenceUtil.parse("Romans 8-9, 11-13"))
     }
 
@@ -49,16 +49,14 @@ internal class ScriptureReferenceUtilTest {
 
     @Test fun `Parse multiple verse ranges`() {
         assertEquals(
-                ScriptureReference(JOHN, VerseRanges(setOf(
-                        VerseRange(Verse(6, 14)), VerseRange(Verse(6, 44))))),
+                ScriptureReference(JOHN, VerseRanges(VerseRange(Verse(6, 14)), VerseRange(Verse(6, 44)))),
                 ScriptureReferenceUtil.parse("John 6:14, 44")
         )
     }
 
     @Test fun `Parse single verse range`() {
         assertEquals(
-                ScriptureReference(FIRST_CORINTHIANS, VerseRanges(setOf(
-                        Verse(13, 4)..Verse(13, 8)))),
+                ScriptureReference(FIRST_CORINTHIANS, VerseRanges(Verse(13, 4)..Verse(13, 8))),
                 ScriptureReferenceUtil.parse("1 Corinthians 13:4-8")
         )
     }
@@ -70,9 +68,7 @@ internal class ScriptureReferenceUtilTest {
 
     @Test fun `Parse multiple verse ranges with multiple verses`() {
         assertEquals(
-                ScriptureReference(JOHN, VerseRanges(setOf(
-                        VerseRange(Verse(20, 24)),
-                        Verse(20, 26)..Verse(20, 28)))),
+                ScriptureReference(JOHN, VerseRanges(VerseRange(Verse(20, 24)), Verse(20, 26)..Verse(20, 28))),
                 ScriptureReferenceUtil.parse("John 20:24, 26-28")
         )
     }

@@ -32,8 +32,9 @@ class ScriptureReferenceUtil private constructor() {
         }
 
         private fun parseChapterRanges(chapters: String) = when {
-            chapters.contains(',') -> ChapterRanges(chapters.split(",").map { parseChapterRange(it) }.toSet())
-            else -> ChapterRanges(setOf(parseChapterRange(chapters)))
+            chapters.contains(',') -> ChapterRanges(chapters.split(",").map { parseChapterRange(it) }
+                    .toSortedSet(ChapterRangeComparator()))
+            else -> ChapterRanges(parseChapterRange(chapters))
         }
 
         private fun parseChapterRange(chapterRangeString: String) = when {
@@ -44,8 +45,9 @@ class ScriptureReferenceUtil private constructor() {
         }
 
         private fun parseVerseRanges(chapter: Int, verseRangesString: String) = when {
-            verseRangesString.contains(',') -> verseRangesString.split(',').map { parseVerseRange(chapter, it) }.toSet()
-            else -> setOf(parseVerseRange(chapter, verseRangesString))
+            verseRangesString.contains(',') -> verseRangesString.split(',').map { parseVerseRange(chapter, it) }
+                    .toSortedSet(VerseRangeComparator())
+            else -> sortedSetOf(VerseRangeComparator(), parseVerseRange(chapter, verseRangesString))
         }
 
         private fun parseVerseRange(chapter: Int, verseRangeString: String) = when {

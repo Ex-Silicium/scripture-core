@@ -7,12 +7,12 @@ data class ScriptureReference(
     constructor(
             book: Book,
             chapter: Int
-    ) : this(book, ChapterRanges(setOf(ChapterRange(chapter))))
+    ) : this(book, ChapterRanges(ChapterRange(chapter)))
 
     constructor(
             book: Book,
             verse: Verse
-    ) : this(book, VerseRanges(setOf(VerseRange(verse))))
+    ) : this(book, VerseRanges(VerseRange(verse)))
 
     override fun compareTo(other: ScriptureReference) = book.compareTo(other.book).let {
         when {
