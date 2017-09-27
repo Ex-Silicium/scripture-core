@@ -19,7 +19,7 @@ data class ChapterRanges(
         is VerseRanges -> {
             val startComparison = chapterRanges.first().start.compareTo(other.verseRanges.first().start.chapter)
             when (startComparison) {
-                0 -> if (other.verseRanges.first().start.number == 1) 0 else -1
+                0 -> if (other.verseRanges.first().start.verseNumber == 1) 0 else -1
                 else -> startComparison
             }
         }
@@ -40,7 +40,7 @@ data class VerseRanges(
         is ChapterRanges -> {
             val startComparison = verseRanges.first().start.chapter.compareTo(other.chapterRanges.first().start)
             when (startComparison) {
-                0 -> if (verseRanges.first().start.number == 1) 0 else 1
+                0 -> if (verseRanges.first().start.verseNumber == 1) 0 else 1
                 else -> startComparison
             }
         }
