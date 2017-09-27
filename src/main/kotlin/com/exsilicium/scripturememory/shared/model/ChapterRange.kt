@@ -5,8 +5,11 @@ data class ChapterRange(
         override val endInclusive: Int = start
 ) : ClosedRange<Int> {
     init {
+        require(start >= 1)
         require(start <= endInclusive)
     }
+
+    fun isValid(book: Book) = book.chapterCount >= endInclusive
 }
 
 internal class ChapterRangeComparator : Comparator<ClosedRange<Int>> {

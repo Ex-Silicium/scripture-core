@@ -310,6 +310,20 @@ enum class Book(
             listOf(20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21)
     );
 
+    val chapterCount by lazy { versesPerChapter.size }
+
+    fun isOldTestament() = this < MATTHEW
+
+    fun isValidChapter(chapter: Int) = chapter <= chapterCount
+
+    fun versesInChapter(chapter: Int): Int {
+        require(chapter > 0)
+        if (isValidChapter(chapter)) {
+            return versesPerChapter[chapter - 1]
+        }
+        throw IndexOutOfBoundsException("Chapter $chapter does not exist in $title.")
+    }
+
     companion object {
         fun parse(name: String) = name.trim().toLowerCase().let { lowercaseName ->
             findBookNameMatch(lowercaseName) ?: findBookAbbreviationMatch(lowercaseName) ?:
