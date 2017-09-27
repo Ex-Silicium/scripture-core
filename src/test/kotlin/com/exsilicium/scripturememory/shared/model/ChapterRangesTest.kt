@@ -37,4 +37,32 @@ internal class ChapterRangesTest {
         val threeSixteen = VerseRanges(VerseRange(Verse(3, 16)))
         assertTrue(threeThroughFive < threeSixteen)
     }
+
+    @Test
+    fun `ChapterRanges with longer ranges is greater than ChapterRanges with shorter ranges`() {
+        val twoRanges = ChapterRanges(1..5, 9..10)
+        val oneRange = ChapterRanges(1..20)
+        assertTrue(oneRange > twoRanges)
+    }
+
+    @Test
+    fun `ChapterRanges with more ranges is not necessarily greater than ChapterRanges with fewer ranges`() {
+        val twoRanges = ChapterRanges(1..5, 9..10)
+        val oneRange = ChapterRanges(1..9)
+        assertTrue(oneRange > twoRanges)
+    }
+
+    @Test
+    fun `ChapterRanges with shorter ranges is less than ChapterRanges with longer ranges`() {
+        val twoRanges = ChapterRanges(1..5, 9..20)
+        val oneRange = ChapterRanges(1..9)
+        assertTrue(twoRanges > oneRange)
+    }
+
+    @Test
+    fun `ChapterRanges with fewer ranges is not necessarily less than ChapterRanges with more ranges`() {
+        val twoRanges = ChapterRanges(1..5, 9..10)
+        val oneRange = ChapterRanges(1..9)
+        assertTrue(twoRanges < oneRange)
+    }
 }

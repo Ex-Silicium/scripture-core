@@ -16,4 +16,12 @@ data class Verse(
             }
         }
     }
+
+    operator fun minus(other: Verse): Int {
+        if (chapter == other.chapter) {
+            return number - other.number
+        } else {
+            throw UnsupportedOperationException("Cannot subtract verse with different chapter")
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.exsilicium.scripturememory.shared.model
 
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class VerseTest {
@@ -19,4 +19,10 @@ internal class VerseTest {
     @Test fun `Chapter 1 less than chapter 2`() = assertTrue(Verse(1, 1) < Verse(2, 1))
 
     @Test fun `Chapter 2 greater than chapter 1`() = assertTrue(Verse(2, 1) > Verse(1, 1))
+
+    @Test fun `Verse 5 minus Verse 1 is 4 verses`() = assertEquals(4, Verse(1, 5) - Verse(1, 1))
+
+    @Test fun `Verse with different chapter fails minus`() {
+        assertThrows(UnsupportedOperationException::class.java) { Verse(2, 2) - Verse(1, 1) }
+    }
 }

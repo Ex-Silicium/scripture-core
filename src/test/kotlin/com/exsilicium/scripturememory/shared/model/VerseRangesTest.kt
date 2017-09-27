@@ -37,4 +37,32 @@ internal class VerseRangesTest {
         val chapterOne = ChapterRanges(ChapterRange(1))
         assertTrue(oneThreeThroughSix > chapterOne)
     }
+
+    @Test
+    fun `VerseRanges with longer ranges is greater than VerseRanges with shorter ranges`() {
+        val twoRanges = VerseRanges(Verse(1, 3)..Verse(1, 6), Verse(1, 9)..Verse(1, 10))
+        val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 6))
+        assertTrue(twoRanges > oneRange)
+    }
+
+    @Test
+    fun `VerseRanges with more ranges is not necessarily greater than VerseRanges with fewer ranges`() {
+        val twoRanges = VerseRanges(Verse(1, 3)..Verse(1, 6), Verse(1, 9)..Verse(1, 10))
+        val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 20))
+        assertTrue(twoRanges < oneRange)
+    }
+
+    @Test
+    fun `VerseRanges with shorter ranges is less than VerseRanges with longer ranges`() {
+        val twoRanges = VerseRanges(Verse(1, 3)..Verse(1, 6), Verse(1, 9)..Verse(1, 10))
+        val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 6))
+        assertTrue(oneRange < twoRanges)
+    }
+
+    @Test
+    fun `VerseRanges with fewer ranges is not necessarily less than VerseRanges with more ranges`() {
+        val twoRanges = VerseRanges(Verse(1, 3)..Verse(1, 6), Verse(1, 9)..Verse(1, 10))
+        val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 20))
+        assertTrue(twoRanges < oneRange)
+    }
 }

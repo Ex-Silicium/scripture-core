@@ -1,6 +1,8 @@
 package com.exsilicium.scripturememory.shared.model
 
-import java.util.*
+import com.exsilicium.scripturememory.shared.extensions.compareChapterRanges
+import com.exsilicium.scripturememory.shared.extensions.compareVerseRanges
+import java.util.SortedSet
 
 sealed class Location : Comparable<Location>
 
@@ -21,7 +23,7 @@ data class ChapterRanges(
                 else -> startComparison
             }
         }
-        is ChapterRanges -> chapterRanges.first().start.compareTo(other.chapterRanges.first().start)
+        is ChapterRanges -> compareChapterRanges(other)
     }
 }
 
@@ -42,6 +44,6 @@ data class VerseRanges(
                 else -> startComparison
             }
         }
-        is VerseRanges -> verseRanges.first().start.compareTo(other.verseRanges.first().start)
+        is VerseRanges -> compareVerseRanges(other)
     }
 }
