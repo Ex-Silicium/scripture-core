@@ -1,7 +1,7 @@
-package com.exsilicium.scripturememory.shared.extensions
+package com.exsilicium.scripture.shared.extensions
 
-import com.exsilicium.scripturememory.shared.model.ChapterRanges
-import com.exsilicium.scripturememory.shared.model.VerseRanges
+import com.exsilicium.scripture.shared.model.ChapterRanges
+import com.exsilicium.scripture.shared.model.VerseRanges
 
 internal fun ChapterRanges.compareChapterRanges(other: ChapterRanges): Int {
     val startingChapterComparison = chapterRanges.first().start.compareTo(other.chapterRanges.first().start)

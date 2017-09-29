@@ -1,7 +1,7 @@
-package com.exsilicium.scripturememory.shared
+package com.exsilicium.scripture.shared
 
-import com.exsilicium.scripturememory.shared.model.*
-import com.exsilicium.scripturememory.shared.model.Book.*
+import com.exsilicium.scripture.shared.model.*
+import com.exsilicium.scripture.shared.model.Book.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

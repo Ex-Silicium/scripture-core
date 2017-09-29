@@ -1,7 +1,7 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
-import com.exsilicium.scripturememory.shared.extensions.compareChapterRanges
-import com.exsilicium.scripturememory.shared.extensions.compareVerseRanges
+import com.exsilicium.scripture.shared.extensions.compareChapterRanges
+import com.exsilicium.scripture.shared.extensions.compareVerseRanges
 import java.util.SortedSet
 
 sealed class Location : Comparable<Location>
