@@ -32,18 +32,3 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0")
     testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0")
 }
-
-afterEvaluate {
-    jacoco {
-        applyTo junitPlatformTest
-    }
-
-    jacocoTestReport {
-        file("${buildDir}/jacoco/junitPlatformTest.exec").renameTo(file("${buildDir}/jacoco/test.exec"))
-//        executionData junitPlatformTest
-        reports {
-            xml.enabled = true
-            html.enabled = false
-        }
-    }
-}
