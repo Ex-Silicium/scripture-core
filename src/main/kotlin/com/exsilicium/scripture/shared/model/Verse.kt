@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 data class Verse(
         val chapter: Int,

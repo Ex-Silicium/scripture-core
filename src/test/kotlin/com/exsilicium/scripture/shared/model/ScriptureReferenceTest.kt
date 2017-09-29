@@ -1,6 +1,6 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
-import com.exsilicium.scripturememory.shared.model.Book.*
+import com.exsilicium.scripture.shared.model.Book.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 

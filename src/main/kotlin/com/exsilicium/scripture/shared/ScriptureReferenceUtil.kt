@@ -1,6 +1,6 @@
-package com.exsilicium.scripturememory.shared
+package com.exsilicium.scripture.shared
 
-import com.exsilicium.scripturememory.shared.model.*
+import com.exsilicium.scripture.shared.model.*
 import java.security.InvalidParameterException
 import kotlin.text.RegexOption.IGNORE_CASE
 

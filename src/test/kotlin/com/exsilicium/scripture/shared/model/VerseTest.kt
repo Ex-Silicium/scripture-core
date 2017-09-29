@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
