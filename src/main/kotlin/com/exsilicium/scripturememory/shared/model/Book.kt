@@ -325,7 +325,7 @@ enum class Book(
     }
 
     companion object {
-        fun parse(name: String) = name.trim().toLowerCase().let { lowercaseName ->
+        fun parse(name: String) = name.trim().replace(".", "").toLowerCase().let { lowercaseName ->
             findBookNameMatch(lowercaseName) ?: findBookAbbreviationMatch(lowercaseName) ?:
                     throw IllegalStateException("Could not parse book name")
         }

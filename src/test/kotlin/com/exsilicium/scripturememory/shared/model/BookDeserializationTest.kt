@@ -12,6 +12,10 @@ internal class BookDeserializationTest {
         }
     }
 
+    @Test fun `Parse book with period`() {
+        assertEquals(Book.EXODUS, Book.parse("Ex."))
+    }
+
     @Test fun `Parse Genesis`() {
         assertEquals(Book.GENESIS, Book.parse("Genesis"))
         assertEquals(Book.GENESIS, Book.parse("Gen"))
