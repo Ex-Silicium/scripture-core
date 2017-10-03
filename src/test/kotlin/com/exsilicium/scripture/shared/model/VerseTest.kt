@@ -37,10 +37,4 @@ internal class VerseTest {
     @Test fun `Verse with different chapter fails minus`() {
         assertThrows(UnsupportedOperationException::class.java) { Verse(2, 2) - Verse(1, 1) }
     }
-
-    @Test fun `Invalid chapter reference`() = assertFalse(Verse(2, 1).isValid(Book.JUDE))
-
-    @Test fun `Invalid verse reference`() = assertFalse(Verse(1, 26).isValid(Book.JUDE))
-
-    @Test fun `Valid verse reference`() = assertTrue(Verse(1, 25).isValid(Book.JUDE))
 }

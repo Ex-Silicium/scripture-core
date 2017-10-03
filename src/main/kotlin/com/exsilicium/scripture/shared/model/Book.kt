@@ -1,9 +1,18 @@
 package com.exsilicium.scripture.shared.model
 
+/**
+ * A list of all Bible Books.
+ *
+ * @property title The title of the Book.
+ * @property abbreviations The common English abbreviations corresponding to the Book.
+ * @property versesPerChapter A list of the numbers of verses per chapter in the Book.
+ *
+ * Information from [E.N.T.E.R.](http://catholic-resources.org/Bible/).
+ */
 enum class Book(
         val title: String,
         val abbreviations: List<String>,
-        val versesPerChapter: List<Int>
+        private val versesPerChapter: List<Int>
 ) {
     GENESIS("Genesis",
             listOf("Gen", "Ge", "Gn"),
@@ -310,12 +319,40 @@ enum class Book(
             listOf(20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21)
     );
 
+    /**
+     * The number of chapters in the Book.
+     */
     val chapterCount by lazy { versesPerChapter.size }
 
+    /**
+     * @return true if the Book is in the Old Testament.
+     */
     fun isOldTestament() = this < MATTHEW
 
-    fun isValidChapter(chapter: Int) = chapter <= chapterCount
+    /**
+     * @return true if the chapter exists in the Book.
+     */
+    fun isValidChapter(chapter: Int): Boolean {
+        require(chapter >= 1)
+        return chapter <= chapterCount
+    }
 
+    /**
+     * @return true if the given [chapterRange] exists in this Book.
+     */
+    fun isValidChapterRange(chapterRange: ClosedRange<Int>)
+            = isValidChapter(chapterRange.start) && isValidChapter(chapterRange.endInclusive)
+
+    /**
+     * @return true if the given [verse] exists in this Book.
+     */
+    fun isValid(verse: Verse) = isValidChapter(verse.chapter) &&
+            versesInChapter(verse.chapter) >= verse.verseNumber
+
+    /**
+     * @return the number of verses in the given [chapter].
+     * @throws IndexOutOfBoundsException if the chapter does not exist in this Book.
+     */
     fun versesInChapter(chapter: Int): Int {
         require(chapter > 0)
         if (isValidChapter(chapter)) {
@@ -325,6 +362,10 @@ enum class Book(
     }
 
     companion object {
+        /**
+         * @return the book corresponding to the given [name].
+         * @throws IllegalStateException if there was no matching Book found.
+         */
         fun parse(name: String) = name.trim().replace(".", "").toLowerCase().let { lowercaseName ->
             findBookNameMatch(lowercaseName) ?: findBookAbbreviationMatch(lowercaseName) ?:
                     throw IllegalStateException("Could not parse book name")
