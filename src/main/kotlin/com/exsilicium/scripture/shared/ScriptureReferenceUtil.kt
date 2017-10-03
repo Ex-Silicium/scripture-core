@@ -6,6 +6,11 @@ import kotlin.text.RegexOption.IGNORE_CASE
 
 class ScriptureReferenceUtil private constructor() {
     companion object {
+        /**
+         * @return A [ScriptureReference] from the given [input].
+         * @throws IllegalArgumentException if the verse is invalid.
+         * @throws InvalidParameterException if the verse cannot be parsed.
+         */
         fun parse(input: String): ScriptureReference {
             require(input.isNotEmpty())
             val reference = input.trim()
@@ -60,7 +65,7 @@ class ScriptureReferenceUtil private constructor() {
         }
 
         private fun parseVerse(chapter: Int, verseString: String) = when {
-            verseString.contains(Regex("[a-c]", IGNORE_CASE)) -> {
+            verseString.contains(Regex("[${Verse.MIN_PART_CHAR}-${Verse.MAX_PART_CHAR}]", IGNORE_CASE)) -> {
                 verseString.forEachIndexed { i, char ->
                     if (char.isLetter()) {
                         return Verse(chapter, verseString.substring(0, i).trim().toInt(), char.toLowerCase())

@@ -65,4 +65,8 @@ internal class VerseRangesTest {
         val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 20))
         assertTrue(twoRanges < oneRange)
     }
+
+    @Test fun `All verse ranges must be valid for a given Book`() {
+        assertFalse(VerseRanges(Verse(1, 1)..Verse(2, 1)).isValid(Book.JUDE))
+    }
 }

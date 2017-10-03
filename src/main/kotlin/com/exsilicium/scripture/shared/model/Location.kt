@@ -4,8 +4,20 @@ import com.exsilicium.scripture.shared.extensions.compareChapterRanges
 import com.exsilicium.scripture.shared.extensions.compareVerseRanges
 import java.util.SortedSet
 
-sealed class Location : Comparable<Location>
+/**
+ * A location in a [Book].
+ *
+ * A [Location] makes no guarantee that it is valid for any [Book].
+ */
+sealed class Location : Comparable<Location> {
+    internal abstract fun isValid(book: Book): Boolean
+}
 
+/**
+ * A sorted set of inclusive ranges of chapters.
+ *
+ * E.g. 1-2, 3-5, 7
+ */
 data class ChapterRanges(
         val chapterRanges: SortedSet<ClosedRange<Int>>
 ) : Location() {
@@ -13,7 +25,10 @@ data class ChapterRanges(
 
     init {
         require(chapterRanges.isNotEmpty())
+        require(chapterRanges.first().start >= 1)
     }
+
+    override fun isValid(book: Book) = chapterRanges.all { book.isValidChapterRange(it) }
 
     override fun compareTo(other: Location) = when (other) {
         is VerseRanges -> {
@@ -27,6 +42,11 @@ data class ChapterRanges(
     }
 }
 
+/**
+ * A sorted set of inclusive ranges of verses.
+ *
+ * E.g. 1:1-2:3b, 2:5
+ */
 data class VerseRanges(
         val verseRanges: SortedSet<ClosedRange<Verse>>
 ) : Location() {
@@ -35,6 +55,8 @@ data class VerseRanges(
     init {
         require(verseRanges.isNotEmpty())
     }
+
+    override fun isValid(book: Book) = verseRanges.all { book.isValid(it.endInclusive) }
 
     override fun compareTo(other: Location) = when (other) {
         is ChapterRanges -> {

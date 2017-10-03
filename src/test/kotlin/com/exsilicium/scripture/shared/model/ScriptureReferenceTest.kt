@@ -1,6 +1,7 @@
 package com.exsilicium.scripture.shared.model
 
 import com.exsilicium.scripture.shared.model.Book.*
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
@@ -27,5 +28,13 @@ internal class ScriptureReferenceTest {
 
     @Test fun `Book with chapter is greater than book`() {
         assertTrue(ScriptureReference(REVELATION, 5) > ScriptureReference(REVELATION))
+    }
+
+    @Test fun `Book and chapter must be valid`() {
+        assertThrows(IllegalArgumentException::class.java) { ScriptureReference(REVELATION, 40) }
+    }
+
+    @Test fun `Book and verse must be valid`() {
+        assertThrows(IllegalArgumentException::class.java) { ScriptureReference(REVELATION, Verse(2, 30)) }
     }
 }
