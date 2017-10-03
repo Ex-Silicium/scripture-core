@@ -1,5 +1,6 @@
 # scripture-core
 
+[ ![Download](https://api.bintray.com/packages/benwicks/scripture/scripture-core/images/download.svg?version=0.1.0) ](https://bintray.com/benwicks/scripture/scripture-core/0.1.0/link)
 [![CircleCI](https://circleci.com/gh/Ex-Silicium/scripture-core.svg?style=svg)](https://circleci.com/gh/Ex-Silicium/scripture-core)
 
 Tools for working with scripture references.
