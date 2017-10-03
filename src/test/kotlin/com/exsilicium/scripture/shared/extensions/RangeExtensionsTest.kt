@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 
-class RangeExtensionsTest {
+internal class RangeExtensionsTest {
 
     @Test fun `Verify empty range`() {
         assertTrue((0..0).isEmptyRange())

@@ -3,7 +3,7 @@ package com.exsilicium.scripture.shared.extensions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class SetExtensionsTest {
+internal class SetExtensionsTest {
 
     @Test fun `Single element in set`() {
         assertEquals("1-3", setOf(1..3).createJoinedString())
