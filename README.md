@@ -5,6 +5,13 @@
 
 Tools for working with scripture references.
 
+## Download
+
+Download [the latest JAR][1] or grab via jCenter:
+```groovy
+compile 'com.exsilicium.scripture:scripture-core:0.1.0'
+```
+
 ## Example Usage
 
 Parse a `ScriptureReference` from a `String`:
@@ -38,3 +45,5 @@ It can be a `Book` and a set of ranges of chapters:
 ```kotlin
 ScriptureReferenceUtil.parse("Romans 8-9, 11")
 ```
+
+[1]: https://bintray.com/ex-silicium/scripture/scripture-core/_latestVersion
