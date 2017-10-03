@@ -28,6 +28,8 @@ data class ScriptureReference(
         require(location?.isValid(book) ?: true)
     }
 
+    override fun toString() = if (location == null) book.title else "${book.title} $location"
+
     override fun compareTo(other: ScriptureReference) = book.compareTo(other.book).let {
         when {
             it != 0 -> it

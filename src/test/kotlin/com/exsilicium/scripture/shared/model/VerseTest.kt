@@ -37,4 +37,12 @@ internal class VerseTest {
     @Test fun `Verse with different chapter fails minus`() {
         assertThrows(UnsupportedOperationException::class.java) { Verse(2, 2) - Verse(1, 1) }
     }
+
+    @Test fun `Verse toString with part`() {
+        assertEquals("1:2b", Verse(1, 2, 'b').toString())
+    }
+
+    @Test fun `Verse toString without part`() {
+        assertEquals("1:2", Verse(1, 2).toString())
+    }
 }

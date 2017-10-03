@@ -26,6 +26,11 @@ data class Verse(
         }
     }
 
+    override fun toString(): String {
+        val chapterAndVerse = "$chapter:$verseNumber"
+        return if (part == null) chapterAndVerse else "$chapterAndVerse$part"
+    }
+
     internal operator fun minus(other: Verse): Int {
         if (chapter == other.chapter) {
             return verseNumber - other.verseNumber

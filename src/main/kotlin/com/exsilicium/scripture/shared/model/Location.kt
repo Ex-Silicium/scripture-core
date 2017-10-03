@@ -2,6 +2,8 @@ package com.exsilicium.scripture.shared.model
 
 import com.exsilicium.scripture.shared.extensions.compareChapterRanges
 import com.exsilicium.scripture.shared.extensions.compareVerseRanges
+import com.exsilicium.scripture.shared.extensions.createJoinedString
+import com.exsilicium.scripture.shared.extensions.isEmptyRange
 import java.util.SortedSet
 
 /**
@@ -40,6 +42,8 @@ data class ChapterRanges(
         }
         is ChapterRanges -> compareChapterRanges(other)
     }
+
+    override fun toString() = chapterRanges.createJoinedString()
 }
 
 /**
@@ -68,4 +72,6 @@ data class VerseRanges(
         }
         is VerseRanges -> compareVerseRanges(other)
     }
+
+    override fun toString() = verseRanges.createJoinedString()
 }
