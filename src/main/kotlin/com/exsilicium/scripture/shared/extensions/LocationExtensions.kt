@@ -12,8 +12,8 @@ internal fun ChapterRanges.compareChapterRanges(other: ChapterRanges): Int {
 }
 
 private fun ChapterRanges.compareAllChapterRanges(other: ChapterRanges)
-        = chapterRanges.sumBy { it.endInclusive - it.start }
-        .compareTo(other.chapterRanges.sumBy { it.endInclusive - it.start })
+        = chapterRanges.sumBy { it.endInclusive - it.start + 1 }
+        .compareTo(other.chapterRanges.sumBy { it.endInclusive - it.start + 1 })
 
 internal fun VerseRanges.compareVerseRanges(other: VerseRanges): Int {
     val startingVerseComparison = verseRanges.first().start.compareTo(other.verseRanges.first().start)
@@ -24,5 +24,5 @@ internal fun VerseRanges.compareVerseRanges(other: VerseRanges): Int {
 }
 
 private fun VerseRanges.compareAllVerseRanges(other: VerseRanges)
-        = verseRanges.sumBy { it.endInclusive - it.start }
-        .compareTo(other.verseRanges.sumBy { it.endInclusive - it.start })
+        = verseRanges.sumBy { it.endInclusive - it.start + 1 }
+        .compareTo(other.verseRanges.sumBy { it.endInclusive - it.start + 1 })
