@@ -23,6 +23,11 @@ A `ScriptureReference` can be just a `Book`:
 ScriptureReferenceUtil.parse("Romans")
 ```
 
+The `Book` can be parsed from an abbreviation:
+```kotlin
+ScriptureReferenceUtil.parse("Ro")
+```
+
 It can be a `Book` and a chapter:
 ```kotlin
 ScriptureReferenceUtil.parse("Romans 8")
