@@ -1,7 +1,7 @@
 package com.exsilicium.scripture.shared
 
 import com.exsilicium.scripture.shared.model.*
-import java.security.InvalidParameterException
+import java.text.ParseException
 import kotlin.text.RegexOption.IGNORE_CASE
 
 class ScriptureReferenceUtil private constructor() {
@@ -9,8 +9,12 @@ class ScriptureReferenceUtil private constructor() {
         /**
          * @return A [ScriptureReference] from the given [input].
          * @throws IllegalArgumentException if the verse is invalid.
-         * @throws InvalidParameterException if the verse cannot be parsed.
+         * @throws ParseException if the verse cannot be parsed.
          */
+        @Throws(
+                IllegalArgumentException::class,
+                ParseException::class
+        )
         fun parse(input: String): ScriptureReference {
             require(input.isNotEmpty())
             val reference = input.trim()
@@ -64,14 +68,17 @@ class ScriptureReferenceUtil private constructor() {
             else -> VerseRange(parseVerse(chapter, verseRangeString))
         }
 
+        @Throws(ParseException::class)
         private fun parseVerse(chapter: Int, verseString: String) = when {
             verseString.contains(Regex("[${Verse.MIN_PART_CHAR}-${Verse.MAX_PART_CHAR}]", IGNORE_CASE)) -> {
+                var lastIndex = 0
                 verseString.forEachIndexed { i, char ->
+                    lastIndex = i
                     if (char.isLetter()) {
                         return Verse(chapter, verseString.substring(0, i).trim().toInt(), char.toLowerCase())
                     }
                 }
-                throw InvalidParameterException("Failed to parse verse")
+                throw ParseException("Failed to parse Verse", lastIndex)
             }
             else -> Verse(chapter, verseString.trim().toInt())
         }

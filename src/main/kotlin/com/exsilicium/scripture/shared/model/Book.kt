@@ -1,5 +1,7 @@
 package com.exsilicium.scripture.shared.model
 
+import java.text.ParseException
+
 /**
  * A list of all Bible Books.
  *
@@ -353,6 +355,7 @@ enum class Book(
      * @return the number of verses in the given [chapter].
      * @throws IndexOutOfBoundsException if the chapter does not exist in this Book.
      */
+    @Throws(IndexOutOfBoundsException::class)
     fun versesInChapter(chapter: Int): Int {
         require(chapter > 0)
         if (isValidChapter(chapter)) {
@@ -364,11 +367,12 @@ enum class Book(
     companion object {
         /**
          * @return the book corresponding to the given [name].
-         * @throws IllegalStateException if there was no matching Book found.
+         * @throws ParseException if there was no matching Book found.
          */
+        @Throws(ParseException::class)
         fun parse(name: String) = name.trim().replace(".", "").toLowerCase().let { lowercaseName ->
             findBookNameMatch(lowercaseName) ?: findBookAbbreviationMatch(lowercaseName) ?:
-                    throw IllegalStateException("Could not parse book name")
+                    throw ParseException("Could not parse book name", 0)
         }
 
         private fun findBookNameMatch(lowercaseName: String)

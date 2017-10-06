@@ -31,6 +31,7 @@ data class Verse(
         return if (part == null) chapterAndVerse else "$chapterAndVerse$part"
     }
 
+    @Throws(UnsupportedOperationException::class)
     internal operator fun minus(other: Verse): Int {
         if (chapter == other.chapter) {
             return verseNumber - other.verseNumber
