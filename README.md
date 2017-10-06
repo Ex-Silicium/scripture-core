@@ -9,7 +9,7 @@ Tools for working with scripture references.
 
 Download [the latest JAR][1] or grab via jCenter:
 ```groovy
-compile 'com.exsilicium.scripture:scripture-core:0.1.0'
+compile 'com.exsilicium.scripture:scripture-core:0.1.1'
 ```
 
 ## Example Usage
