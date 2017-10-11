@@ -3,11 +3,12 @@ package com.exsilicium.scripture.shared.model
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import java.text.ParseException
 
 internal class BookDeserializationTest {
 
     @Test fun `Parse invalid book name`() {
-        assertThrows(IllegalStateException::class.java, { Book.parse("Johnny") }).let {
+        assertThrows(ParseException::class.java, { Book.parse("Johnny") }).let {
             assertEquals("Could not parse book name", it.message)
         }
     }
