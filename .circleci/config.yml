@@ -25,4 +25,4 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: gradle test
+      - run: gradle clean test jacocoTestReport; bash <(curl -s https://codecov.io/bash);
