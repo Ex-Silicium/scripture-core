@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -64,5 +64,9 @@ internal class VerseRangesTest {
         val twoRanges = VerseRanges(Verse(1, 3)..Verse(1, 6), Verse(1, 9)..Verse(1, 10))
         val oneRange = VerseRanges(Verse(1, 3)..Verse(1, 20))
         assertTrue(twoRanges < oneRange)
+    }
+
+    @Test fun `All verse ranges must be valid for a given Book`() {
+        assertFalse(VerseRanges(Verse(1, 1)..Verse(2, 1)).isValid(Book.JUDE))
     }
 }

@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -7,6 +7,10 @@ internal class ChapterRangesTest {
 
     @Test fun `Require non-empty ranges`() {
         assertThrows(IllegalArgumentException::class.java) { ChapterRanges() }
+    }
+
+    @Test fun `Require ranges start at one or greater`() {
+        assertThrows(IllegalArgumentException::class.java) { ChapterRanges(0..3) }
     }
 
     @Test fun `Secondary constructor sorts input`() {
@@ -64,5 +68,9 @@ internal class ChapterRangesTest {
         val twoRanges = ChapterRanges(1..5, 9..10)
         val oneRange = ChapterRanges(1..9)
         assertTrue(twoRanges < oneRange)
+    }
+
+    @Test fun `All chapter ranges must be valid for a given Book`() {
+        assertFalse(ChapterRanges(1..2).isValid(Book.JUDE))
     }
 }

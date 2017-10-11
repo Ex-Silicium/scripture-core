@@ -1,18 +1,34 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
+/**
+ * A discrete reference to a [Book] and optional [Location] in scripture.
+ */
 data class ScriptureReference(
         val book: Book,
         val location: Location? = null
 ) : Comparable<ScriptureReference> {
+
+    /**
+     * A single chapter in a given Book.
+     */
     constructor(
             book: Book,
             chapter: Int
     ) : this(book, ChapterRanges(ChapterRange(chapter)))
 
+    /**
+     * A single verse in a given Book.
+     */
     constructor(
             book: Book,
             verse: Verse
     ) : this(book, VerseRanges(VerseRange(verse)))
+
+    init {
+        require(location?.isValid(book) ?: true)
+    }
+
+    override fun toString() = if (location == null) book.title else "${book.title} $location"
 
     override fun compareTo(other: ScriptureReference) = book.compareTo(other.book).let {
         when {

@@ -1,6 +1,6 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
-data class ChapterRange(
+internal data class ChapterRange(
         override val start: Int,
         override val endInclusive: Int = start
 ) : ClosedRange<Int> {
@@ -8,8 +8,6 @@ data class ChapterRange(
         require(start >= 1)
         require(start <= endInclusive)
     }
-
-    fun isValid(book: Book) = book.chapterCount >= endInclusive
 }
 
 internal class ChapterRangeComparator : Comparator<ClosedRange<Int>> {

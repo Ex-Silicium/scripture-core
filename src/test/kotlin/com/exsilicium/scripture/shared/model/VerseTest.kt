@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -38,9 +38,11 @@ internal class VerseTest {
         assertThrows(UnsupportedOperationException::class.java) { Verse(2, 2) - Verse(1, 1) }
     }
 
-    @Test fun `Invalid chapter reference`() = assertFalse(Verse(2, 1).isValid(Book.JUDE))
+    @Test fun `Verse toString with part`() {
+        assertEquals("1:2b", Verse(1, 2, 'b').toString())
+    }
 
-    @Test fun `Invalid verse reference`() = assertFalse(Verse(1, 26).isValid(Book.JUDE))
-
-    @Test fun `Valid verse reference`() = assertTrue(Verse(1, 25).isValid(Book.JUDE))
+    @Test fun `Verse toString without part`() {
+        assertEquals("1:2", Verse(1, 2).toString())
+    }
 }

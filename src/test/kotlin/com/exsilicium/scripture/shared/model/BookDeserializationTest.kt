@@ -1,4 +1,4 @@
-package com.exsilicium.scripturememory.shared.model
+package com.exsilicium.scripture.shared.model
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,6 +10,10 @@ internal class BookDeserializationTest {
         assertThrows(IllegalStateException::class.java, { Book.parse("Johnny") }).let {
             assertEquals("Could not parse book name", it.message)
         }
+    }
+
+    @Test fun `Parse book with period`() {
+        assertEquals(Book.EXODUS, Book.parse("Ex."))
     }
 
     @Test fun `Parse Genesis`() {
