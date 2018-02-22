@@ -25,7 +25,7 @@ apply plugin: 'org.jetbrains.dokka'
 def dokkaOutputDir = "$buildDir/javadoc"
 
 group 'com.exsilicium.scripture'
-version '0.1.1'
+version '0.1.2-RC1'
 
 repositories {
     jcenter()
