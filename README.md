@@ -5,14 +5,7 @@
 
 Scripture Core provides tools for working with scripture references. It provides the `ScriptureReference` class to model different types of scripture references (e.g. an entire book, chapter(s), ranges of chapters, verse(s), and ranges of verses).
 
-A `ScriptureReference` can be parsed from a `String` using the `ScriptureReferenceUtil` class. See example usage below.
-
-## Download
-
-Download [the latest JAR][1] or grab via jCenter:
-```groovy
-compile 'com.exsilicium.scripture:scripture-core:0.1.1'
-```
+A `ScriptureReference` can be parsed from a `String` using the `ScriptureReferenceUtil` class.
 
 ## Example Usage
 
@@ -51,6 +44,13 @@ ScriptureReferenceUtil.parse("Romans 8:1-3, 4-5")
 It can be a `Book` and a set of ranges of chapters:
 ```kotlin
 ScriptureReferenceUtil.parse("Romans 8-9, 11")
+```
+
+## Download
+
+Download [the latest JAR][1] or grab via jCenter:
+```groovy
+compile 'com.exsilicium.scripture:scripture-core:0.1.2'
 ```
 
 [1]: https://bintray.com/ex-silicium/scripture/scripture-core/_latestVersion

@@ -51,14 +51,14 @@ dokka {
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
-    publications = ['MyPublication']
+    publications = ['ScriptureCoreJar']
     pkg {
         repo = 'scripture'
         name = project.name
         userOrg = 'ex-silicium'
         version {
             name = project.version.toString()
-            desc = 'Minor patch with better VerseRange#toString'
+            desc = 'Minor patch with better VerseRanges#toString'
             vcsTag = 'v' + project.version
         }
     }
@@ -82,7 +82,7 @@ def pomConfig = {
 
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        ScriptureCoreJar(MavenPublication) {
             from components.java
             artifact sourcesJar
             artifact javadocJar
