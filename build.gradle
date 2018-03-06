@@ -1,6 +1,6 @@
 buildscript {
     ext.dokka_version = '0.9.16'
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.30'
 
     repositories {
         jcenter()
@@ -27,7 +27,7 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 def dokkaOutputDir = "$buildDir/javadoc"
 
 group 'com.exsilicium.scripture'
-version '0.1.2-RC1'
+version '0.1.2'
 
 repositories {
     jcenter()
@@ -58,7 +58,7 @@ bintray {
         userOrg = 'ex-silicium'
         version {
             name = project.version.toString()
-            desc = 'Minor patch with better ScriptureReference#toString'
+            desc = 'Minor patch with better VerseRange#toString'
             vcsTag = 'v' + project.version
         }
     }

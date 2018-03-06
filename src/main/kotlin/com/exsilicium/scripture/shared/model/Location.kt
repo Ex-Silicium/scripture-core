@@ -3,6 +3,7 @@ package com.exsilicium.scripture.shared.model
 import com.exsilicium.scripture.shared.extensions.compareChapterRanges
 import com.exsilicium.scripture.shared.extensions.compareVerseRanges
 import com.exsilicium.scripture.shared.extensions.createJoinedString
+import com.exsilicium.scripture.shared.extensions.joinString
 import java.util.SortedSet
 
 /**
@@ -12,6 +13,8 @@ import java.util.SortedSet
  */
 sealed class Location : Comparable<Location> {
     internal abstract fun isValid(book: Book): Boolean
+
+    abstract override fun toString(): String
 }
 
 /**
@@ -72,5 +75,5 @@ data class VerseRanges(
         is VerseRanges -> compareVerseRanges(other)
     }
 
-    override fun toString() = verseRanges.createJoinedString()
+    override fun toString() = verseRanges.joinString()
 }
