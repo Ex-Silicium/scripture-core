@@ -5,7 +5,7 @@
 
 Scripture Core provides tools for working with scripture references. It provides the `ScriptureReference` class to model different types of scripture references (e.g. an entire book, chapter(s), ranges of chapters, verse(s), and ranges of verses).
 
-A `ScriptureReference` can be parsed from a `String` using the `ScriptureReferenceUtil` class. See example usage below.
+A `ScriptureReference` can be parsed from a `String` using the `ScriptureReferenceUtil` class.
 
 ## Example Usage
 
