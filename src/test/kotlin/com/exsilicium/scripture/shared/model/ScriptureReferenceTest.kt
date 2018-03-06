@@ -65,6 +65,6 @@ internal class ScriptureReferenceTest {
     @Test fun `Book and verse ranges toString is Book title and verse ranges`() {
         val verseRanges = VerseRanges(Verse(1, 9)..Verse(1, 10), Verse(1, 14)..Verse(1, 14))
         val bookAndVerseRanges = ScriptureReference(Book.JOHN, verseRanges)
-        assertEquals("John 1:9-1:10, 1:14", bookAndVerseRanges.toString())
+        assertEquals("John 1:9-10, 1:14", bookAndVerseRanges.toString())
     }
 }
