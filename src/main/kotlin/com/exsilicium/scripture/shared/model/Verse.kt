@@ -31,7 +31,7 @@ data class Verse(
         return if (part == null) chapterAndVerse else "$chapterAndVerse$part"
     }
 
-    fun verseNumberAndPart(): String {
+    internal fun verseNumberAndPart(): String {
         return if (part == null) verseNumber.toString() else "$verseNumber$part"
     }
 
