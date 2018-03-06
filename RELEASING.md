@@ -10,3 +10,4 @@ Releasing
  7. Update the `build.gradle` to the next SNAPSHOT version.
  8. `git commit -am "Prepare next development version."`
  9. `git push && git push --tags`
+ 10. Attach JAR to GitHub release.
