@@ -1,6 +1,6 @@
 package com.exsilicium.scripture.shared.model
 
-internal data class ChapterRange(
+data class ChapterRange(
         override val start: Int,
         override val endInclusive: Int = start
 ) : ClosedRange<Int> {

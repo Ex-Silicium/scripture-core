@@ -46,6 +46,16 @@ It can be a `Book` and a set of ranges of chapters:
 ScriptureReferenceUtil.parse("Romans 8-9, 11")
 ```
 
+It can be a `Book` and a set of ranges of chapter with verse:
+```kotlin
+ScriptureReferenceUtil.parse("Romans 8:1-9:2")
+```
+
+It can be a `Book` and multiple combinations of above within same book separated by `;`:
+```kotlin
+ScriptureReferenceUtil.parse("Romans 8:1-3; 9:1,2; 10")
+```
+
 ## Download
 
 Download [the latest JAR][1] or grab via jCenter:
