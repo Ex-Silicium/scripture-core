@@ -15,9 +15,37 @@ class ScriptureReferenceUtil private constructor() {
                 IllegalArgumentException::class,
                 ParseException::class
         )
-        fun parse(input: String): ScriptureReference {
+        fun parse(input: String): List<ScriptureReference> {
             require(input.isNotEmpty())
             val reference = input.trim()
+
+            val refs = ArrayList<ScriptureReference>()
+            val parts = reference.split(';')
+            val endIndex = parts[0].lastIndexOf(' ')
+            refs.add(parseOneRef(parts[0]))
+            if (endIndex > 0) {
+                val book = parts[0].substring(0, endIndex)
+                parts.stream().skip(1).map { "$book $it" }.forEach { refs.add(parseOneRef(it)) }
+            }
+            return refs
+        }
+
+        private fun parseOneRef(input: String): ScriptureReference {
+            require(input.isNotEmpty())
+            val reference = input.trim()
+            //check for multiple chapters with verses range
+            if ((reference.count{ ":".contains(it) } > 1) and (reference.contains('-'))) {
+                val referenceParts = reference.split('-')
+                val endIndex = referenceParts[0].lastIndexOf(' ')
+                val book = referenceParts[0].substring(0, endIndex)
+                val startVersePart = referenceParts[0].substring(endIndex + 1, referenceParts[0].length).split(':')
+                val endVersePart = referenceParts[1].split(':')
+                val verseStart = parseVerse(startVersePart[0].toInt(), startVersePart[1])
+                val verseEnd = parseVerse(endVersePart[0].toInt(), endVersePart[1])
+                return ScriptureReference(
+                        Book.parse(book),
+                        VerseRanges(verseStart..verseEnd))
+            }
             if (reference.contains(':')) {
                 val referenceParts = reference.split(':')
                 val endIndex = referenceParts[0].lastIndexOf(' ')
@@ -29,12 +57,12 @@ class ScriptureReferenceUtil private constructor() {
                 )
             } else {
                 if (reference.contains(Regex("[1-9]"))) {
-                    reference.forEachIndexed({ i, char ->
+                    reference.forEachIndexed { i, char ->
                         if (char.isDigit() and (i > 0)) {
                             val book = Book.parse(reference.substring(0, i))
                             return ScriptureReference(book, parseChapterRanges(reference.substring(i)))
                         }
-                    })
+                    }
                 }
                 return ScriptureReference(Book.parse(reference))
             }
