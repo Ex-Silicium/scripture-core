@@ -1,6 +1,5 @@
 # Scripture Core
 
-[![Download](https://api.bintray.com/packages/ex-silicium/scripture/scripture-core/images/download.svg)][1]
 [![CircleCI](https://circleci.com/gh/Ex-Silicium/scripture-core.svg?style=svg)](https://circleci.com/gh/Ex-Silicium/scripture-core)
 
 Scripture Core provides tools for working with scripture references. It provides the `ScriptureReference` class to model different types of scripture references (e.g. an entire book, chapter(s), ranges of chapters, verse(s), and ranges of verses).
